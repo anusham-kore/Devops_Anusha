@@ -1,0 +1,91 @@
+🔥
+
+🟠 Topic 3: Variables & Expressions
+🔹 Why Variables?
+
+👉 Avoid hardcoding values
+👉 Make code reusable across:
+
+dev / stage / prod
+🔹 1. Input Variables
+Define (variables.tf)
+variable "instance_type" {
+  default = "t2.micro"
+}
+Use (main.tf)
+resource "aws_instance" "demo" {
+  instance_type = var.instance_type
+}
+🔹 Ways to Pass Variables
+1. CLI
+terraform apply -var="instance_type=t3.micro"
+2. .tfvars file
+instance_type = "t3.micro"
+terraform apply -var-file="dev.tfvars"
+🔹 2. Output Values
+
+👉 Used to display useful info
+
+output "public_ip" {
+  value = aws_instance.demo.public_ip
+}
+
+✔ After apply → shows EC2 IP
+
+🔹 3. Local Values
+
+👉 For internal reuse (clean code)
+
+locals {
+  env = "dev"
+}
+
+Use:
+
+tags = {
+  Environment = local.env
+}
+🔹 4. Data Sources (🔥 Important)
+
+👉 Fetch existing resources (NOT create)
+
+data "aws_ami" "latest" {
+  most_recent = true
+  owners      = ["amazon"]
+}
+
+Use:
+
+ami = data.aws_ami.latest.id
+🔹 5. Expressions & Functions
+Example Functions:
+upper("dev")      → "DEV"
+length(["a","b"]) → 2
+Conditional Expression:
+instance_type = var.env == "prod" ? "t3.large" : "t2.micro"
+🔥 Real DevOps Example
+variable "env" {}
+
+resource "aws_instance" "demo" {
+  instance_type = var.env == "prod" ? "t3.large" : "t2.micro"
+
+  tags = {
+    Environment = var.env
+  }
+}
+
+👉 Same code → different environments
+
+🔥 Interview Focus
+Difference:
+variable vs local
+resource vs data source
+How to pass variables?
+Conditional expressions usage
+✅ Your Task
+Create variable for:
+instance_type
+region
+Use .tfvars
+Add output (public IP)
+Try conditional logic

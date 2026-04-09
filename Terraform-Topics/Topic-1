@@ -1,0 +1,83 @@
+)
+
+🟢 Topic 1: Terraform Basics (Foundation)
+🔹 What is Terraform?
+
+Terraform is an Infrastructure as Code (IaC) tool used to:
+
+Create infrastructure
+Update infrastructure
+Destroy infrastructure
+👉 using code instead of manual UI
+🔹 What is IaC (Infrastructure as Code)?
+
+Instead of creating resources manually in AWS:
+
+❌ Clicking in console
+✅ You write .tf files
+
+👉 Benefits:
+
+Version control (Git)
+Reusability
+Automation
+Consistency
+🔹 Terraform Core Concepts
+1. Provider
+Connects Terraform to platform
+provider "aws" {
+  region = "ap-south-1"
+}
+2. Resource
+Actual infrastructure (EC2, S3, etc.)
+resource "aws_instance" "myec2" {
+  ami           = "ami-123456"
+  instance_type = "t2.micro"
+}
+3. Variables
+variable "instance_type" {
+  default = "t2.micro"
+}
+4. Output
+output "instance_ip" {
+  value = aws_instance.myec2.public_ip
+}
+🔹 Terraform File Structure
+main.tf        → main config
+variables.tf   → inputs
+outputs.tf     → outputs
+provider.tf    → provider config
+🔹 Install Terraform
+
+👉 Download from:
+
+Official site of HashiCorp
+
+👉 Verify:
+
+terraform -v
+🔹 First Hands-on (Very Important 💯)
+Step 1: Create main.tf
+provider "aws" {
+  region = "ap-south-1"
+}
+
+resource "aws_instance" "demo" {
+  ami           = "ami-0f5ee92e2d63afc18"  # example
+  instance_type = "t2.micro"
+}
+Step 2: Run Commands
+terraform init
+terraform plan
+terraform apply
+
+prompted
+
+🔹 What Happens Internally?
+init → downloads provider plugins
+plan → shows execution plan
+apply → creates infra
+
+🔥 Mini Interview Insight
+Terraform is declarative, not imperative
+You define desired state, Terraform achieves it 

@@ -1,0 +1,126 @@
+🚀
+
+🟡 Topic 2: Core Commands & State (VERY IMPORTANT ⚠️)
+
+This is frequently asked in interviews + critical in real projects
+
+🔹 Core Terraform Commands
+1. terraform init
+
+👉 Initializes your project
+
+Downloads providers (AWS, etc.)
+Prepares working directory
+terraform init
+2. terraform plan
+
+👉 Shows what Terraform will do
+
+terraform plan
+
+✔ Example output:
+
++ create → new resource
+~ update → modify
+- destroy → delete
+
+👉 Safe command (no changes applied)
+
+3. terraform apply
+
+👉 Actually creates/updates infra
+
+terraform apply
+Executes plan
+Prompts for approval (yes)
+4. terraform destroy
+
+👉 Deletes all resources
+
+terraform destroy
+
+⚠️ Important in cost control (AWS billing!)
+
+🔹 Terraform State (🔥 CRITICAL CONCEPT)
+What is State?
+Stored in: terraform.tfstate
+Keeps track of:
+Resources created
+Their current status
+Mapping between config & real infra
+
+👉 Without state → Terraform doesn’t know what exists
+
+🔹 Example
+
+You create EC2 → state file stores:
+
+{
+  "resources": [
+    "aws_instance.demo"
+  ]
+}
+🔹 Why State is Important?
+Tracks infrastructure
+Detects changes (drift)
+Prevents duplication
+🔴 Problem: Local State (Not Good for Teams)
+
+If stored locally:
+
+❌ Not shared
+❌ Risk of overwrite
+❌ No locking
+🔹 Solution: Remote State
+
+Use:
+
+AWS S3 → store state
+DynamoDB → locking
+
+👉 Setup example:
+
+terraform {
+  backend "s3" {
+    bucket         = "my-terraform-state"
+    key            = "dev/terraform.tfstate"
+    region         = "ap-south-1"
+    dynamodb_table = "terraform-lock"
+  }
+}
+🔹 State Locking (VERY IMPORTANT 🔥)
+
+Problem:
+
+2 engineers run apply → conflict 💥
+
+Solution:
+
+DynamoDB lock ensures:
+Only one execution at a time
+🔹 Drift Detection
+
+👉 Drift = Manual change in AWS outside Terraform
+
+Example:
+
+You change EC2 type in AWS console
+
+👉 terraform plan will:
+
+Detect mismatch
+Try to fix it
+🔥 Interview Questions (Must Know)
+What is Terraform state?
+Difference between local & remote state?
+What is state locking?
+What is drift?
+✅ Your Task
+
+Run:
+
+terraform plan
+terraform apply
+terraform destroy
+Check terraform.tfstate file manually
+Understand why remote state is needed
