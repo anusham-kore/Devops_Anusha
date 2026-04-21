@@ -1,0 +1,208 @@
+🔥
+
+🟤 7. Provisioners (Use Carefully)
+🧠 What is a Provisioner?
+
+👉 A provisioner in Terraform is used to execute scripts or commands after a resource is created or before it is destroyed
+
+👉 Provisioners are not used to create infrastructure directly
+They are used for post-creation actions
+
+🔹 Simple Understanding
+Terraform creates resource -> provisioner runs command/script
+
+Example:
+
+Create EC2
+Then run a script on EC2
+
+🔥 Why Provisioners Exist?
+Sometimes after infrastructure is created, you may need to:
+
+Install software
+Copy files
+Run initialization commands
+
+👉 Terraform provisioners help do this
+
+⚠️ Important Note
+
+Provisioners should be used only when necessary
+
+HashiCorp recommends avoiding them when better alternatives exist, such as:
+
+User data
+Cloud-init
+Configuration management tools
+Image baking
+
+🔧 Types of Provisioners
+1. `local-exec`
+Runs command on the machine where Terraform is executed
+
+2. `remote-exec`
+Runs command on the remote resource, like an EC2 instance
+
+3. `file`
+Copies files from local machine to remote resource
+
+🔥 1. local-exec Provisioner
+
+👉 Runs on your local system
+
+Example:
+
+resource "null_resource" "example" {
+  provisioner "local-exec" {
+    command = "echo Terraform execution completed"
+  }
+}
+
+✅ Use cases:
+
+Write logs
+Call local scripts
+Trigger notifications
+
+🔥 2. remote-exec Provisioner
+
+👉 Runs commands inside the created remote server
+
+Example:
+
+resource "aws_instance" "demo" {
+  ami           = "ami-0f5ee92e2d63afc18"
+  instance_type = "t2.micro"
+  key_name      = "my-key"
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo yum update -y",
+      "sudo yum install -y nginx",
+      "sudo systemctl start nginx"
+    ]
+  }
+
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file("my-key.pem")
+    host        = self.public_ip
+  }
+}
+
+👉 Here Terraform connects through SSH and runs commands on EC2
+
+🔥 3. file Provisioner
+
+👉 Copies a file from local system to remote machine
+
+Example:
+
+resource "aws_instance" "demo" {
+  ami           = "ami-0f5ee92e2d63afc18"
+  instance_type = "t2.micro"
+
+  provisioner "file" {
+    source      = "app.conf"
+    destination = "/tmp/app.conf"
+  }
+
+  connection {
+    type        = "ssh"
+    user        = "ec2-user"
+    private_key = file("my-key.pem")
+    host        = self.public_ip
+  }
+}
+
+🔹 The `connection` Block
+
+For `remote-exec` and `file`, Terraform needs connection details
+
+Common values:
+
+type = "ssh"
+user = "ec2-user"
+private_key = file("my-key.pem")
+host = self.public_ip
+
+👉 Without proper connection, provisioners fail
+
+🔥 When Provisioners Run
+
+By default:
+
+After resource creation
+
+You can also run during destroy:
+
+provisioner "local-exec" {
+  when    = destroy
+  command = "echo Resource is being deleted"
+}
+
+⚠️ Risks of Provisioners
+Provisioners can be fragile because:
+
+Network may fail
+SSH may fail
+Scripts may fail
+Terraform becomes less predictable
+
+👉 That is why they are considered last-resort tools
+
+🔥 Better Alternatives
+Instead of provisioners, prefer:
+
+EC2 user data
+Cloud-init
+Ansible
+Packer images
+Kubernetes manifests
+
+✅ Example:
+Instead of `remote-exec` to install nginx, use EC2 `user_data`
+
+🧠 Interview Questions
+❓ What is a provisioner in Terraform?
+
+👉
+"A provisioner is used to run scripts or commands on local or remote systems as part of resource creation or destruction."
+
+❓ What is the difference between `local-exec` and `remote-exec`?
+
+👉
+`local-exec` runs on the local machine where Terraform is executed
+`remote-exec` runs on the remote resource
+
+❓ Why are provisioners not recommended?
+
+👉 Because they are less predictable, harder to maintain, and better alternatives usually exist
+
+❓ What is the use of the `file` provisioner?
+
+👉 To copy files from local machine to remote resource
+
+🔥 Real Interview Scenario
+❓ How would you install software on an EC2 instance using Terraform?
+
+👉
+"It can be done using `remote-exec`, but in production I prefer `user_data` or configuration management tools because provisioners are a last resort."
+
+🧠 Best Practices
+Avoid provisioners in production when possible
+Use `user_data` for EC2 bootstrap
+Use provisioners only for small or unavoidable tasks
+Keep scripts simple and retry-safe
+Do not rely on provisioners for long-term configuration management
+
+✅ Quick Summary
+Provisioner = run command/script
+`local-exec` -> local machine
+`remote-exec` -> remote server
+`file` -> copy files
+Use carefully and prefer better alternatives
+
+Reply "yes" -> next:
+👉 Terraform with CI/CD (Jenkins and GitHub Actions)

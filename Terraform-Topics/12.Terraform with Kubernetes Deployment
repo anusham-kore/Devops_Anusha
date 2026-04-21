@@ -1,0 +1,118 @@
+🔥
+
+🟢 12. Terraform with Kubernetes Deployment
+🧠 What is This Topic?
+
+👉 This topic explains how Terraform and Kubernetes work together
+
+👉 Terraform is commonly used to:
+
+Create Kubernetes infrastructure
+Provision EKS clusters
+Create node groups
+Deploy some Kubernetes resources
+
+🔥 Terraform Role in Kubernetes
+
+Terraform is mainly used for:
+
+VPC
+Subnets
+EKS cluster
+Node groups
+IAM roles
+Load balancer related infra
+
+👉 Kubernetes then manages:
+
+Pods
+Deployments
+Services
+Ingress
+ConfigMaps
+Secrets
+
+🔹 Simple Understanding
+
+Terraform builds the platform
+Kubernetes runs the applications
+
+🔥 Common Flow
+1. Terraform creates AWS network
+2. Terraform creates EKS cluster
+3. Terraform creates node group
+4. `kubectl` or Helm deploys app workloads
+
+👉 This is the most common real-world pattern
+
+🔥 Architecture
+
+Users -> Load Balancer -> Kubernetes Service -> Pods
+
+Underlying platform:
+
+AWS VPC
+EKS Cluster
+Managed Node Group
+Private/Public Subnets
+
+🔥 How Terraform Helps
+1. Cluster Provisioning
+
+Creates the EKS control plane
+
+2. Worker Nodes
+
+Creates managed node groups
+
+3. Networking
+
+Creates subnets, routes, internet access, NAT
+
+4. IAM
+
+Creates roles and permissions required for EKS
+
+🔥 Can Terraform Deploy Kubernetes Resources?
+
+👉 Yes, using the Kubernetes provider
+
+Example resources:
+
+Namespace
+Deployment
+Service
+ConfigMap
+
+But in many projects:
+
+Terraform creates infra
+Helm or kubectl deploys applications
+
+⚠️ Important Best Practice
+
+Do not mix too much app deployment logic into Terraform unless there is a clear reason
+
+👉 Keep responsibilities clean:
+
+Terraform -> infra
+Helm/Kubernetes manifests -> app deployment
+
+🧠 Interview Questions
+❓ How is Terraform used with Kubernetes?
+
+👉
+"Terraform is used to provision the Kubernetes infrastructure such as VPC, EKS cluster, node groups, and IAM roles. Application deployment is usually handled by Kubernetes manifests or Helm."
+
+❓ Does Terraform replace Kubernetes?
+
+👉 No. Terraform provisions infrastructure, while Kubernetes manages containerized workloads.
+
+❓ What do you deploy with Terraform in EKS projects?
+
+👉 VPC, subnets, EKS, node groups, IAM roles, and sometimes base Kubernetes resources
+
+✅ Quick Summary
+Terraform builds Kubernetes platform
+Kubernetes runs workloads
+In AWS, Terraform is mainly used to provision EKS and supporting infrastructure

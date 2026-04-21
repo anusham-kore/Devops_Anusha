@@ -1,0 +1,88 @@
+🔥
+
+🟡 13. Terraform with Helm
+🧠 What is Helm?
+
+👉 Helm is a package manager for Kubernetes
+
+It helps install and manage applications in Kubernetes using reusable charts
+
+Examples:
+
+nginx-ingress
+metrics-server
+prometheus
+argocd
+
+🔥 Terraform + Helm Together
+
+👉 A common DevOps workflow is:
+
+Terraform creates EKS cluster
+Terraform or Helm deploys Kubernetes applications
+
+👉 Terraform can manage Helm charts using the Helm provider
+
+🔹 Simple Flow
+
+Terraform -> creates cluster
+Helm -> installs applications on cluster
+
+🔥 Why Use Helm?
+
+Easy installation of Kubernetes apps
+Reusable chart-based deployment
+Version control of app packages
+Easy upgrades and rollback
+
+🔥 Example Use Cases
+
+Install ingress controller
+Install monitoring stack
+Install cert-manager
+Install Argo CD
+
+🔥 Terraform Helm Provider Concept
+
+Terraform can define:
+
+provider "helm" { ... }
+
+and manage:
+
+resource "helm_release" "nginx" { ... }
+
+👉 This allows Helm deployments through Terraform workflow
+
+⚠️ Best Practice
+
+Use Terraform with Helm mainly for platform-level tools
+
+Examples:
+
+ingress controller
+monitoring
+logging
+cluster add-ons
+
+Avoid using Terraform Helm for every application release in very dynamic delivery pipelines
+
+🔥 Interview Questions
+❓ What is Helm?
+
+👉
+"Helm is a package manager for Kubernetes used to install and manage applications using charts."
+
+❓ Why use Helm with Terraform?
+
+👉
+"Terraform provisions the infrastructure, and Helm helps deploy Kubernetes packages like ingress controllers, monitoring tools, and cluster add-ons."
+
+❓ What is `helm_release` in Terraform?
+
+👉 A Terraform resource used to install and manage Helm charts
+
+✅ Quick Summary
+Helm manages Kubernetes packages
+Terraform + Helm is a common combination in EKS projects
+Terraform builds infra, Helm installs cluster tools

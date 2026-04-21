@@ -1,0 +1,202 @@
+🔥
+
+⚫ 8. Terraform with CI/CD (DevOps Level)
+🧠 What is CI/CD with Terraform?
+
+👉 CI/CD with Terraform means automating infrastructure changes through pipelines instead of running Terraform commands manually
+
+CI = Continuous Integration
+CD = Continuous Delivery / Continuous Deployment
+
+👉 Instead of a DevOps engineer running:
+
+terraform plan
+terraform apply
+
+Pipeline tools like Jenkins or GitHub Actions run them automatically
+
+🔹 Simple Understanding
+Code change -> pipeline triggered -> validate -> plan -> approval -> apply
+
+🔥 Why Use CI/CD with Terraform?
+1. Automation
+No need to run commands manually every time
+2. Consistency
+Same steps run every time
+3. Safety
+Plan can be reviewed before apply
+4. Team Collaboration
+Everyone follows same deployment process
+5. Auditability
+Pipeline history shows who changed what and when
+
+🔹 Common CI/CD Tools
+
+Jenkins
+GitHub Actions
+GitLab CI
+Azure DevOps
+
+👉 Most common interview examples:
+Jenkins and GitHub Actions
+
+🔥 Typical Terraform Pipeline Stages
+1. `terraform fmt -check`
+Checks formatting
+
+2. `terraform init`
+Initializes working directory
+
+3. `terraform validate`
+Checks syntax and configuration validity
+
+4. `terraform plan`
+Shows what changes Terraform wants to make
+
+5. Approval Step
+Manual approval before production apply
+
+6. `terraform apply`
+Applies approved changes
+
+🔄 Pipeline Flow
+Developer pushes code
+Pipeline starts
+Terraform validates code
+Terraform creates plan
+Team reviews plan
+Approved changes are applied
+
+🔥 Example Jenkins Pipeline
+
+pipeline {
+  agent any
+
+  stages {
+    stage('Init') {
+      steps {
+        sh 'terraform init'
+      }
+    }
+
+    stage('Validate') {
+      steps {
+        sh 'terraform validate'
+      }
+    }
+
+    stage('Plan') {
+      steps {
+        sh 'terraform plan'
+      }
+    }
+
+    stage('Apply') {
+      steps {
+        input 'Approve Terraform Apply?'
+        sh 'terraform apply -auto-approve'
+      }
+    }
+  }
+}
+
+👉 This is a basic Jenkins flow for Terraform automation
+
+🔥 Example GitHub Actions Workflow
+
+name: Terraform
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+
+👉 In real projects, `apply` is usually protected with approval or environment controls
+
+🔐 Important Production Practices
+Use remote backend
+Use state locking
+Do not store secrets in code
+Use environment variables or secret managers
+Add manual approval before `apply`
+Separate pipelines for dev and prod
+
+⚠️ Risks Without CI/CD
+Manual mistakes
+No approval flow
+No visibility into infra changes
+Different engineers may run different steps
+
+👉 CI/CD reduces these risks
+
+🔥 Real DevOps Workflow
+
+Developer updates Terraform code
+Pushes to Git repository
+CI pipeline runs `fmt`, `validate`, `plan`
+Plan output is reviewed
+Approved pipeline runs `apply`
+
+👉 This makes infrastructure changes controlled and repeatable
+
+🧠 Interview Questions
+❓ Why integrate Terraform with CI/CD?
+
+👉
+"To automate infrastructure changes, ensure consistency, and add approval and validation steps before deployment."
+
+❓ What stages do you include in a Terraform pipeline?
+
+👉
+`fmt`, `init`, `validate`, `plan`, approval, `apply`
+
+❓ Why is `terraform plan` important in CI/CD?
+
+👉 Because it shows proposed changes before they are applied
+
+❓ Why should `apply` be protected?
+
+👉 Because it changes real infrastructure and may impact production
+
+🔥 Real Interview Scenario
+❓ How do you manage Terraform deployments in a team?
+
+👉
+"We store Terraform code in Git, use a remote backend for shared state, and run `validate` and `plan` in CI. For production, `apply` is triggered only after manual approval."
+
+🧠 Best Practices
+Keep Terraform code in Git
+Use pull requests for review
+Use remote state with locking
+Run `fmt`, `validate`, and `plan` in every pipeline
+Protect `apply` with approvals
+Separate non-production and production deployment flows
+
+✅ Quick Summary
+CI/CD automates Terraform
+Common tools -> Jenkins, GitHub Actions
+Pipeline -> fmt, init, validate, plan, approval, apply
+Best practice -> protect production apply
+
+Reply "yes" -> next:
+👉 Advanced Terraform Topics (`count`, `for_each`, `depends_on`, `lifecycle`, `dynamic blocks`)

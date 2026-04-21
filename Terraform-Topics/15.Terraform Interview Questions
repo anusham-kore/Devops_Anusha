@@ -1,0 +1,107 @@
+🔥
+
+🔴 15. Terraform Interview Questions
+🧠 Why This Topic Matters
+
+👉 This topic is for final interview preparation
+It helps you practice common Terraform questions with short and strong answers
+
+🔥 Common Terraform Interview Questions
+❓ What is Terraform?
+
+👉
+"Terraform is an Infrastructure as Code tool used to provision and manage infrastructure using declarative configuration files."
+
+❓ What is the difference between Terraform and Ansible?
+
+👉
+"Terraform is mainly used for infrastructure provisioning, while Ansible is mainly used for configuration management and software setup."
+
+❓ What is Terraform state?
+
+👉
+"Terraform state stores resource information and maps Terraform configuration to real infrastructure."
+
+❓ Why is remote state important?
+
+👉
+"Remote state allows team collaboration, centralized state storage, and locking to prevent concurrent changes."
+
+❓ What is state locking?
+
+👉
+"State locking prevents multiple users from modifying the same Terraform state at the same time."
+
+❓ What is drift in Terraform?
+
+👉
+"Drift is when actual infrastructure changes manually outside Terraform and no longer matches Terraform configuration or state."
+
+❓ What is a module?
+
+👉
+"A module is a reusable container of Terraform resources used to organize and standardize infrastructure code."
+
+❓ Difference between `count` and `for_each`?
+
+👉
+"`count` is index-based and works well for similar resources. `for_each` is key-based and better for uniquely identified resources."
+
+❓ What is `depends_on`?
+
+👉
+"It is used to define an explicit dependency when Terraform cannot infer resource order automatically."
+
+❓ What is `lifecycle`?
+
+👉
+"`lifecycle` controls how Terraform handles resource create, update, and destroy behavior."
+
+❓ What are workspaces?
+
+👉
+"Workspaces let you use the same configuration for multiple environments by keeping separate state files."
+
+❓ What are provisioners?
+
+👉
+"Provisioners execute commands or scripts on local or remote systems, but they should be used carefully because better alternatives usually exist."
+
+❓ How do you use Terraform in CI/CD?
+
+👉
+"Terraform is integrated into CI/CD to run `fmt`, `validate`, `plan`, and controlled `apply` steps with approvals."
+
+🔥 Project-Based Interview Questions
+❓ What Terraform project did you build?
+
+👉
+"I built a modular AWS Terraform project with VPC, public and private subnets, NAT Gateway, Network Load Balancer, Route53, and EKS with managed node groups."
+
+❓ Why did you place worker nodes in private subnets?
+
+👉
+"For better security, because worker nodes should not be directly exposed to the internet."
+
+❓ How do modules interact in your project?
+
+👉
+"Modules interact through input variables and output values. For example, the VPC module outputs subnet IDs that are used by the NLB and EKS modules."
+
+❓ What are the main best practices you followed?
+
+👉
+"I used modules, variables, outputs, tagging, private subnet placement, and remote backend structure for cleaner and safer infrastructure management."
+
+🔥 Final Interview Advice
+
+When answering:
+
+Explain definition clearly
+Explain why it is used
+Connect it to your project if possible
+Keep answers practical, not only theoretical
+
+✅ Quick Summary
+This topic is your final Terraform interview question bank
+Practice these answers and connect them with your real project experience

@@ -1,0 +1,167 @@
+🔥
+
+🔴 6. Workspaces (Environment Management)
+🧠 What is a Workspace?
+
+👉 A workspace in Terraform lets you manage multiple environments using the same configuration
+
+Examples:
+
+dev
+stage
+prod
+
+👉 Same code, different state files
+
+🔹 Simple Understanding
+One Terraform codebase -> multiple environments -> separate state per workspace
+
+✅ Useful when you want:
+
+Same infra pattern
+Different environment names
+Separate state tracking
+
+🔥 Why Workspaces Are Important?
+1. Environment Separation
+Keep dev, stage, and prod isolated
+2. Same Code Reuse
+No need to duplicate Terraform files
+3. Safer Deployments
+Changes in dev do not affect prod
+4. Better Team Workflow
+Easy to test in non-production first
+
+🔹 Default Workspace
+
+Terraform starts with:
+
+default
+
+👉 If you do nothing, Terraform uses the `default` workspace
+
+🔥 Important Workspace Commands
+Create workspace
+terraform workspace new dev
+
+List workspaces
+terraform workspace list
+
+Switch workspace
+terraform workspace select prod
+
+Show current workspace
+terraform workspace show
+
+Delete workspace
+terraform workspace delete stage
+
+⚠️ You cannot delete the workspace you are currently using
+
+🔄 How Workspaces Actually Work
+
+When you switch workspace:
+
+Terraform keeps separate state for each workspace
+
+Example:
+
+default -> default state
+dev -> dev state
+prod -> prod state
+
+👉 This means resources created in `dev` are tracked separately from `prod`
+
+🔥 Real Example
+variable "env" {
+  default = "dev"
+}
+
+resource "aws_instance" "demo" {
+  ami           = "ami-0f5ee92e2d63afc18"
+  instance_type = terraform.workspace == "prod" ? "t3.medium" : "t2.micro"
+
+  tags = {
+    Environment = terraform.workspace
+    Name        = "app-${terraform.workspace}"
+  }
+}
+
+👉 If current workspace = `prod`
+instance_type -> `t3.medium`
+
+👉 If current workspace = `dev`
+instance_type -> `t2.micro`
+
+🔹 Built-in Variable
+
+Terraform provides:
+
+terraform.workspace
+
+👉 It returns the current workspace name
+
+Use cases:
+
+Conditional resource sizing
+Environment-based naming
+Different tags per environment
+
+⚠️ Important Limitation
+
+Workspaces separate state
+They do NOT create completely separate code folders
+
+👉 If environments need very different configurations, separate folders or separate root modules may be better
+
+🔥 When to Use Workspaces?
+
+✅ Good for:
+
+dev / test / prod with mostly same infra
+Small to medium environment separation
+Learning and interview scenarios
+
+❌ Not ideal for:
+
+Completely different architectures
+Complex enterprise setups with many differences
+
+🧠 Interview Questions
+❓ What is a Terraform workspace?
+
+👉
+"Terraform workspaces allow us to use the same configuration for multiple environments by keeping separate state files."
+
+❓ Why use workspaces?
+
+👉 To manage `dev`, `stage`, and `prod` without duplicating code
+
+❓ What does `terraform.workspace` do?
+
+👉 It returns the currently selected workspace name
+
+❓ Workspace vs separate folders?
+
+👉 Workspaces are good for similar environments; separate folders are better when environments differ a lot
+
+🔥 Real Interview Scenario
+❓ How do you deploy the same infra to dev and prod?
+
+👉
+"I can use Terraform workspaces to switch between environments. Each workspace maintains separate state, and I can use `terraform.workspace` for environment-specific naming, tags, or instance sizes."
+
+🧠 Best Practices
+Use workspaces only when environments are mostly similar
+Use clear naming like dev, stage, prod
+Do not depend only on workspaces for very complex production environments
+Combine workspaces with remote backend for team usage
+
+✅ Quick Summary
+Workspace = environment separation
+Same code -> different state
+Useful for dev/stage/prod
+`terraform.workspace` gives current environment
+
+Reply "yes" -> next:
+👉 Provisioners in Terraform (`local-exec` and `remote-exec`)

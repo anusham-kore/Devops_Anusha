@@ -1,0 +1,117 @@
+🔥
+
+🔵 14. Terraform Best Practices
+🧠 Why Best Practices Matter
+
+👉 Terraform can become difficult to manage if code is not structured properly
+
+Best practices help you build:
+
+Clean code
+Reusable modules
+Safer deployments
+Team-friendly workflows
+
+🔥 Important Best Practices
+1. Use Modules
+
+👉 Split infrastructure into logical reusable modules
+
+Examples:
+
+VPC
+EKS
+RDS
+Load balancer
+
+2. Avoid Hardcoding
+
+👉 Use variables instead of fixed values
+
+Examples:
+
+region
+instance type
+CIDRs
+environment names
+
+3. Use Remote State
+
+👉 Store state in S3 and use DynamoDB locking
+
+Why?
+
+Team collaboration
+State safety
+Conflict prevention
+
+4. Do Not Commit State Files
+
+👉 Never commit:
+
+`terraform.tfstate`
+`terraform.tfstate.backup`
+
+5. Use Clear Naming
+
+👉 Use meaningful names for resources, variables, and modules
+
+6. Add Common Tags
+
+👉 Tag resources with:
+
+Environment
+Project
+Owner
+ManagedBy
+
+7. Use `terraform fmt` and `validate`
+
+👉 Always format and validate before apply
+
+8. Protect Production Changes
+
+👉 Review `terraform plan` carefully before running `apply`
+
+9. Keep Secrets Secure
+
+👉 Do not hardcode passwords, keys, or tokens
+
+Use:
+
+secret managers
+CI/CD secrets
+sensitive variables
+
+10. Keep Environments Separate
+
+👉 Use workspaces or separate tfvars/environment folders when needed
+
+11. Prefer `for_each` When Keys Matter
+
+👉 Helps keep resource identity stable
+
+12. Use Provisioners Only When Necessary
+
+👉 Prefer user data, cloud-init, Helm, or config management tools
+
+🔥 Team Best Practices
+
+Use Git for version control
+Use pull requests for review
+Use CI/CD for plan and apply
+Use remote state
+Use code review before production changes
+
+🧠 Interview Questions
+❓ What are Terraform best practices?
+
+👉
+"Important Terraform best practices include using modules, remote state, variables, proper tagging, secure secret handling, and validating plans before apply."
+
+❓ Why should you avoid hardcoding?
+
+👉 Because it reduces reusability and makes environment management difficult
+
+✅ Quick Summary
+Terraform best practices help make infrastructure safer, cleaner, and easier to maintain in team environments

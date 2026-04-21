@@ -1,14 +1,16 @@
 resource "aws_lb" "nlb" {
-  name               = "k8s-ingress"
+  name               = var.name
   load_balancer_type = "network"
   subnets            = var.public_subnets
+  tags               = var.tags
 }
 
 resource "aws_lb_target_group" "tg" {
-  name     = "k8s-tg"
+  name     = var.target_group_name
   port     = 80
   protocol = "TCP"
   vpc_id   = var.vpc_id
+  tags     = var.tags
 }
 
 resource "aws_lb_listener" "listener" {

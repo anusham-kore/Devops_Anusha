@@ -1,0 +1,162 @@
+🔥
+
+🟣 11. Terraform Interview Revision
+🧠 Why This Topic Matters
+
+👉 After learning all Terraform topics, you should revise them in interview format
+
+👉 This topic helps you:
+
+Remember important commands
+Revise core concepts quickly
+Explain your project clearly
+Prepare strong interview answers
+
+🔥 Most Important Terraform Commands
+
+`terraform init`
+Initialize Terraform working directory
+
+`terraform fmt`
+Format Terraform files
+
+`terraform validate`
+Validate Terraform syntax and configuration
+
+`terraform plan`
+Preview changes
+
+`terraform apply`
+Create or update infrastructure
+
+`terraform destroy`
+Delete infrastructure
+
+`terraform output`
+Show output values
+
+`terraform state list`
+List resources in state
+
+`terraform state show`
+Show one resource from state
+
+`terraform import`
+Import existing infra into Terraform state
+
+`terraform workspace list`
+Show workspaces
+
+`terraform workspace select dev`
+Switch workspace
+
+🔥 Quick Revision of Core Concepts
+1. Provider
+
+👉 Connects Terraform to cloud platform like AWS
+
+2. Resource
+
+👉 Creates actual infrastructure
+
+3. Variable
+
+👉 Accepts input values
+
+4. Output
+
+👉 Displays useful values after apply
+
+5. Module
+
+👉 Reusable Terraform code block
+
+6. State
+
+👉 Terraform’s source of truth for managed infrastructure
+
+7. Backend
+
+👉 Defines where state is stored
+
+8. Workspace
+
+👉 Helps manage multiple environments with same code
+
+🔥 High-Focus Interview Topics
+
+Remote state
+Modules
+State locking
+Drift
+`count` vs `for_each`
+`depends_on`
+`lifecycle`
+Provisioners
+CI/CD with Terraform
+
+🧠 Short Interview Answers
+❓ What is Terraform?
+
+👉
+"Terraform is an Infrastructure as Code tool used to provision and manage infrastructure through declarative configuration files."
+
+❓ What is Terraform state?
+
+👉
+"Terraform state tracks the resources Terraform manages and maps configuration to real cloud infrastructure."
+
+❓ Why use remote state?
+
+👉
+"Remote state supports team collaboration, central storage, and locking to avoid concurrent modifications."
+
+❓ What is drift?
+
+👉
+"Drift happens when infrastructure is changed manually outside Terraform, causing mismatch with Terraform state."
+
+❓ Why use modules?
+
+👉
+"Modules improve reusability, maintainability, and cleaner infrastructure design."
+
+❓ Difference between `count` and `for_each`?
+
+👉
+"`count` uses numeric indexes and is good for identical resources. `for_each` uses keys and is better when resource identity matters."
+
+🔥 Real Project Revision
+
+Your project architecture:
+
+Route53 -> NLB -> EKS
+inside VPC with public and private subnets
+
+Project modules:
+
+VPC
+NLB
+Route53
+EKS
+
+Important explanation:
+
+VPC gives networking foundation
+NLB receives traffic
+Route53 provides DNS
+EKS runs workloads
+Private subnets improve security
+
+🎯 Final Interview Tip
+
+Do not answer only with definitions
+Always explain:
+
+what it is
+why it is used
+where you used it in your project
+
+✅ Quick Summary
+This topic is your final revision sheet
+Use it before interviews and practice explaining your real project confidently
