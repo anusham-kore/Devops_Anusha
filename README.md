@@ -48,6 +48,7 @@ Before going deep into Azure, build comfort in these basics:
 - Monitoring and alerting basics
 
 ### 5. Security Basics
+- Topic file: [5.Security Basics.md](5.Security%20Basics.md)
 - Authentication vs authorization
 - RBAC concepts
 - Secret management
@@ -57,6 +58,7 @@ Before going deep into Azure, build comfort in these basics:
 ## Azure Interview Topics
 
 ### 1. Azure Fundamentals
+- Topic file: [6.Azure Fundamentals.md](6.Azure%20Fundamentals.md)
 - What is Azure
 - Regions, region pairs, and availability zones
 - Resource groups
@@ -267,7 +269,7 @@ Interviewers often test practical thinking, not just definitions. Focus on:
 
 ## Hands-On Practice Checklist
 
-To be interview-ready, try to practice these tasks:
+To be interview-ready, practice each topic in the Azure portal wherever possible. From this point onward, Azure topic files should include a hands-on section with portal steps, what to observe, and cleanup guidance.
 
 - Create a resource group
 - Deploy a virtual machine
