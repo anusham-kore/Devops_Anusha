@@ -57,6 +57,22 @@ Before going deep into Azure, build comfort in these basics:
 
 ## Azure Interview Topics
 
+| No. | Topic | Topic File |
+| --- | --- | --- |
+| 1 | Azure Fundamentals | [6.Azure Fundamentals.md](6.Azure%20Fundamentals.md) |
+| 2 | Azure Identity and Access Management | [7. Azure Identity and Access Management.md](7.%20Azure%20Identity%20and%20Access%20Management.md) |
+| 3 | Azure Compute Services | [8. Azure Compute Services.md](8.%20Azure%20Compute%20Services.md) |
+| 4 | Azure Storage | [9. Azure Storage.md](9.%20Azure%20Storage.md) |
+| 5 | Azure Networking | [10. Azure Networking.md](10.%20Azure%20Networking.md) |
+| 6 | Azure Databases | [11. Azure Databases.md](11.%20Azure%20Databases.md) |
+| 7 | Azure Monitoring and Management | [12. Azure Monitoring and Management.md](12.%20Azure%20Monitoring%20and%20Management.md) |
+| 8 | Backup, Disaster Recovery, and High Availability | [13. Backup Disaster Recovery and High Availability.md](13.%20Backup%20Disaster%20Recovery%20and%20High%20Availability.md) |
+| 9 | Azure Security | [14. Azure Security.md](14.%20Azure%20Security.md) |
+| 10 | Azure Governance | [15. Azure Governance.md](15.%20Azure%20Governance.md) |
+| 11 | Infrastructure as Code | [16. Infrastructure as Code.md](16.%20Infrastructure%20as%20Code.md) |
+| 12 | Azure DevOps | [17. Azure DevOps.md](17.%20Azure%20DevOps.md) |
+| 13 | Containers and Kubernetes | [18. Containers and Kubernetes.md](18.%20Containers%20and%20Kubernetes.md) |
+
 ### 1. Azure Fundamentals
 - Topic file: [6.Azure Fundamentals.md](6.Azure%20Fundamentals.md)
 - What is Azure
@@ -68,6 +84,7 @@ Before going deep into Azure, build comfort in these basics:
 - Shared responsibility model
 
 ### 2. Azure Identity and Access Management
+- Topic file: [7. Azure Identity and Access Management.md](7.%20Azure%20Identity%20and%20Access%20Management.md)
 - Microsoft Entra ID (Azure AD)
 - Users, groups, and roles
 - Role-Based Access Control (RBAC)
@@ -78,6 +95,7 @@ Before going deep into Azure, build comfort in these basics:
 - Privileged Identity Management basics
 
 ### 3. Azure Compute Services
+- Topic file: [8. Azure Compute Services.md](8.%20Azure%20Compute%20Services.md)
 - Virtual Machines
 - VM sizes and pricing basics
 - Availability sets vs availability zones
@@ -89,6 +107,7 @@ Before going deep into Azure, build comfort in these basics:
 - When to choose VM vs App Service vs AKS vs Functions
 
 ### 4. Azure Storage
+- Topic file: [9. Azure Storage.md](9.%20Azure%20Storage.md)
 - Storage accounts
 - Blob storage
 - File storage
@@ -100,6 +119,7 @@ Before going deep into Azure, build comfort in these basics:
 - Storage security and firewall rules
 
 ### 5. Azure Networking
+- Topic file: [10. Azure Networking.md](10.%20Azure%20Networking.md)
 - Virtual networks
 - Subnets
 - Network Security Groups
@@ -114,6 +134,7 @@ Before going deep into Azure, build comfort in these basics:
 - VNet peering
 
 ### 6. Azure Databases
+- Topic file: [11. Azure Databases.md](11.%20Azure%20Databases.md)
 - Azure SQL Database
 - Managed Instance basics
 - Cosmos DB basics
@@ -122,6 +143,7 @@ Before going deep into Azure, build comfort in these basics:
 - Choosing the right database service
 
 ### 7. Azure Monitoring and Management
+- Topic file: [12. Azure Monitoring and Management.md](12.%20Azure%20Monitoring%20and%20Management.md)
 - Azure Monitor
 - Log Analytics Workspace
 - Application Insights
@@ -132,6 +154,7 @@ Before going deep into Azure, build comfort in these basics:
 - Azure Advisor
 
 ### 8. Backup, Disaster Recovery, and High Availability
+- Topic file: [13. Backup Disaster Recovery and High Availability.md](13.%20Backup%20Disaster%20Recovery%20and%20High%20Availability.md)
 - Azure Backup
 - Recovery Services Vault
 - Site Recovery basics
@@ -141,6 +164,7 @@ Before going deep into Azure, build comfort in these basics:
 - Geo-redundancy
 
 ### 9. Azure Security
+- Topic file: [14. Azure Security.md](14.%20Azure%20Security.md)
 - Microsoft Defender for Cloud basics
 - Key Vault
 - Disk encryption basics
@@ -150,6 +174,7 @@ Before going deep into Azure, build comfort in these basics:
 - Governance and compliance basics
 
 ### 10. Azure Governance
+- Topic file: [15. Azure Governance.md](15.%20Azure%20Governance.md)
 - Azure Policy
 - Resource locks
 - Tags
@@ -159,6 +184,7 @@ Before going deep into Azure, build comfort in these basics:
 - Naming standards
 
 ### 11. Infrastructure as Code
+- Topic file: [16. Infrastructure as Code.md](16.%20Infrastructure%20as%20Code.md)
 - ARM templates basics
 - Bicep basics
 - Terraform basics for Azure
@@ -167,6 +193,7 @@ Before going deep into Azure, build comfort in these basics:
 - Environment-based deployments
 
 ### 12. Azure DevOps
+- Topic file: [17. Azure DevOps.md](17.%20Azure%20DevOps.md)
 - Azure Repos
 - Azure Pipelines
 - Build pipeline vs release pipeline
@@ -178,6 +205,7 @@ Before going deep into Azure, build comfort in these basics:
 - Deployment strategies
 
 ### 13. Containers and Kubernetes
+- Topic file: [18. Containers and Kubernetes.md](18.%20Containers%20and%20Kubernetes.md)
 - Docker basics
 - Container registry basics
 - Azure Container Registry
@@ -271,6 +299,7 @@ Interviewers often test practical thinking, not just definitions. Focus on:
 
 To be interview-ready, practice each topic in the Azure portal wherever possible. From this point onward, Azure topic files should include a hands-on section with portal steps, what to observe, and cleanup guidance.
 
+- Full project lab: [Labs/azure-fullstack-aks-project.md](Labs/azure-fullstack-aks-project.md)
 - Create a resource group
 - Deploy a virtual machine
 - Configure NSG rules
