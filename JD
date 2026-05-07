@@ -1,0 +1,27 @@
+Detailed Job description:
+Required Qualifications
+• 5–8 years of professional experience in DevOps, backend engineering, or platform
+engineering
+• Strong Python skills with real production experience
+• Hands-on experience building or maintaining backend services (REST APIs,
+microservices)
+• Working knowledge of data engineering concepts (ETL, pipelines, data validation)
+• Experience with at least one major cloud platform (AWS or Azure)
+• Familiarity with CI/CD tooling and release automation
+• Experience with Docker and container orchestration (Kubernetes preferred)
+• Solid Linux fundamentals and troubleshooting skills
+Key Responsibilities
+• Design, build, and maintain CI/CD pipelines and deployment automation
+(including GitHub
+Actions where applicable).
+• Develop and support Python-based backend services and REST APIs.
+• Build and operate data pipelines, ingestion workflows, and processing jobs.
+• Manage containerized workloads using Docker and Kubernetes.
+• Apply Infrastructure-as-Code practices for repeatable, versioned environments.
+• Implement and improve observability (logging, metrics, alerting) and participate
+in incident
+troubleshooting.
+• Collaborate with senior engineers on system design, delivery, and operational
+readiness.
+• Contribute to documentation and engineering best practices, including reliable
+branching/release workflows.
