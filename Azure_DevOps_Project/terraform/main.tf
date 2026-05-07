@@ -135,7 +135,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vnet_subnet_id       = azurerm_subnet.aks_subnet.id
     os_disk_size_gb      = 100
     max_pods             = 110
-    availability_zones   = ["1", "2", "3"]
+    zones                = [1, 2, 3]
     enable_auto_scaling  = true
     min_count            = 3
     max_count            = 10
@@ -148,21 +148,16 @@ resource "azurerm_kubernetes_cluster" "aks" {
   network_profile {
     network_plugin      = "azure"
     network_policy      = "azure"
-    docker_bridge_cidr  = "172.17.0.1/16"
     dns_service_ip      = "10.0.0.10"
     service_cidr        = "10.0.0.0/16"
     load_balancer_sku   = "standard"
   }
 
-  addon_profile {
-    oms_agent {
-      enabled                    = true
-      log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
-    }
-    azure_policy {
-      enabled = true
-    }
+  oms_agent {
+    log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
   }
+
+  azure_policy_enabled = true
 
   depends_on = [azurerm_subnet_network_security_group_association.aks]
 }
@@ -307,8 +302,6 @@ resource "azurerm_postgresql_flexible_server" "user_db" {
   resource_group_name    = azurerm_resource_group.rg.name
   administrator_login    = var.db_admin_user
   administrator_password = var.db_admin_password
-  database_charset       = "UTF8"
-  database_collation     = "en_US.utf8"
   sku_name               = "B_Standard_B2s"
   storage_mb             = 32768
   backup_retention_days  = 30
@@ -316,6 +309,13 @@ resource "azurerm_postgresql_flexible_server" "user_db" {
   private_dns_zone_id    = azurerm_private_dns_zone.postgres.id
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.postgres]
+}
+
+resource "azurerm_postgresql_flexible_server_database" "user_db_main" {
+  name              = "userdb"
+  server_id         = azurerm_postgresql_flexible_server.user_db.id
+  charset           = "UTF8"
+  collation         = "en_US.utf8"
 }
 
 resource "azurerm_postgresql_flexible_server" "order_db" {
@@ -324,8 +324,6 @@ resource "azurerm_postgresql_flexible_server" "order_db" {
   resource_group_name    = azurerm_resource_group.rg.name
   administrator_login    = var.db_admin_user
   administrator_password = var.db_admin_password
-  database_charset       = "UTF8"
-  database_collation     = "en_US.utf8"
   sku_name               = "B_Standard_B2s"
   storage_mb             = 32768
   backup_retention_days  = 30
@@ -335,14 +333,19 @@ resource "azurerm_postgresql_flexible_server" "order_db" {
   depends_on = [azurerm_private_dns_zone_virtual_network_link.postgres]
 }
 
+resource "azurerm_postgresql_flexible_server_database" "order_db_main" {
+  name              = "orderdb"
+  server_id         = azurerm_postgresql_flexible_server.order_db.id
+  charset           = "UTF8"
+  collation         = "en_US.utf8"
+}
+
 resource "azurerm_postgresql_flexible_server" "payment_db" {
   name                   = "${var.environment}-payment-db"
   location               = azurerm_resource_group.rg.location
   resource_group_name    = azurerm_resource_group.rg.name
   administrator_login    = var.db_admin_user
   administrator_password = var.db_admin_password
-  database_charset       = "UTF8"
-  database_collation     = "en_US.utf8"
   sku_name               = "B_Standard_B2s"
   storage_mb             = 32768
   backup_retention_days  = 30
@@ -350,6 +353,13 @@ resource "azurerm_postgresql_flexible_server" "payment_db" {
   private_dns_zone_id    = azurerm_private_dns_zone.postgres.id
 
   depends_on = [azurerm_private_dns_zone_virtual_network_link.postgres]
+}
+
+resource "azurerm_postgresql_flexible_server_database" "payment_db_main" {
+  name              = "paymentdb"
+  server_id         = azurerm_postgresql_flexible_server.payment_db.id
+  charset           = "UTF8"
+  collation         = "en_US.utf8"
 }
 
 # ============ KEY VAULT ============
