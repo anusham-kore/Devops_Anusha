@@ -1,13 +1,13 @@
 variable "resource_group_name" {
   description = "Name of the resource group"
   type        = string
-  default     = "devops-prod-rg"
+  default     = "devops-prod-rg-centralindia"
 }
 
 variable "location" {
   description = "Azure location"
   type        = string
-  default     = "East US"
+  default     = "centralindia"
 }
 
 variable "environment" {
@@ -51,14 +51,14 @@ variable "db_subnet_prefix" {
 variable "acr_name" {
   description = "ACR name (must be unique globally)"
   type        = string
-  default     = "devopsproducr"
+  default     = "devopsproductcrci"
 }
 
 # AKS
 variable "aks_name" {
   description = "AKS cluster name"
   type        = string
-  default     = "devops-prod-aks"
+  default     = "devops-prod-aks-ci"
 }
 
 # Application Gateway
@@ -72,7 +72,7 @@ variable "appgw_name" {
 variable "dns_zone_name" {
   description = "DNS zone name (domain name)"
   type        = string
-  default     = "example.com"
+  default     = "anusha-devops-demo.com"
 }
 
 # Logging & Monitoring
@@ -113,5 +113,5 @@ variable "db_admin_password" {
 variable "keyvault_name" {
   description = "Key Vault name (must be unique globally)"
   type        = string
-  default     = "devops-prod-kv"
+  default     = "devops-prod-kv-ci-anusha-anusha01"
 }

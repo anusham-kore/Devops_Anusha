@@ -1,0 +1,88 @@
+PS C:\Users\Anusha.Maddela> # 21. Display Outputs
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> Write-Host ""
+
+PS C:\Users\Anusha.Maddela> Write-Host "===========================================" -ForegroundColor Cyan
+===========================================
+PS C:\Users\Anusha.Maddela> Write-Host "Infrastructure Deployment Complete!" -ForegroundColor Cyan
+Infrastructure Deployment Complete!
+PS C:\Users\Anusha.Maddela> Write-Host "===========================================" -ForegroundColor Cyan
+===========================================
+PS C:\Users\Anusha.Maddela> Write-Host ""
+
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> Write-Host "Resource Group: $RESOURCE_GROUP" -ForegroundColor Yellow
+Resource Group: devops-prod-rg-centralindia
+PS C:\Users\Anusha.Maddela> Write-Host "Location: $LOCATION" -ForegroundColor Yellow
+Location: centralindia
+PS C:\Users\Anusha.Maddela> Write-Host ""
+
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> Write-Host "Key Resources:" -ForegroundColor Cyan
+Key Resources:
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> $ACR_SERVER = az acr show `
+>>     --resource-group $RESOURCE_GROUP `
+>>     --name $ACR_NAME `
+>>     --query loginServer -o tsv
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> Write-Host "- ACR Login Server: $ACR_SERVER"
+- ACR Login Server: devopsproductcrci.azurecr.io
+PS C:\Users\Anusha.Maddela> Write-Host "- AKS Cluster: $AKS_CLUSTER_NAME"
+- AKS Cluster: devops-prod-aks-ci
+PS C:\Users\Anusha.Maddela> Write-Host "- Application Gateway Public IP: $APPGW_IP"
+- Application Gateway Public IP: 20.235.81.34
+PS C:\Users\Anusha.Maddela> Write-Host "- DNS Zone: $DNS_ZONE"
+- DNS Zone: anusha-devops-demo.com
+PS C:\Users\Anusha.Maddela> Write-Host "- Key Vault: https://$KEY_VAULT_NAME.vault.azure.net/"
+- Key Vault: https://devops-prod-kv-ci-anusha.vault.azure.net/
+PS C:\Users\Anusha.Maddela> Write-Host ""
+
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> Write-Host "Database Hosts:" -ForegroundColor Cyan
+Database Hosts:
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> $USER_DB_HOST = az postgres flexible-server show `
+>>     --resource-group $RESOURCE_GROUP `
+>>     --name "user-db-ci" `
+>>     --query fullyQualifiedDomainName -o tsv
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> $ORDER_DB_HOST = az postgres flexible-server show `
+>>     --resource-group $RESOURCE_GROUP `
+>>     --name "order-db-ci" `
+>>     --query fullyQualifiedDomainName -o tsv
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> $PAYMENT_DB_HOST = az postgres flexible-server show `
+>>     --resource-group $RESOURCE_GROUP `
+>>     --name "payment-db-ci" `
+>>     --query fullyQualifiedDomainName -o tsv
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> Write-Host "- User DB: $USER_DB_HOST"
+- User DB: user-db-ci.postgres.database.azure.com
+PS C:\Users\Anusha.Maddela> Write-Host "- Order DB: $ORDER_DB_HOST"
+- Order DB: order-db-ci.postgres.database.azure.com
+PS C:\Users\Anusha.Maddela> Write-Host "- Payment DB: $PAYMENT_DB_HOST"
+- Payment DB: payment-db-ci.postgres.database.azure.com
+PS C:\Users\Anusha.Maddela> Write-Host ""
+
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> Write-Host "Get AKS Credentials:" -ForegroundColor Cyan
+Get AKS Credentials:
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> Write-Host "az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_CLUSTER_NAME --overwrite-existing"
+az aks get-credentials --resource-group devops-prod-rg-centralindia --name devops-prod-aks-ci --overwrite-existing
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> Write-Host ""
+
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> Write-Host "Verify AKS Nodes:" -ForegroundColor Cyan
+Verify AKS Nodes:
+PS C:\Users\Anusha.Maddela> Write-Host "kubectl get nodes"
+kubectl get nodes
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> Write-Host ""
+
+PS C:\Users\Anusha.Maddela>
+PS C:\Users\Anusha.Maddela> Write-Host "Deployment completed successfully!" -ForegroundColor Green
+Deployment completed successfully!
+PS C:\Users\Anusha.Maddela>

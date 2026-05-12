@@ -5,6 +5,7 @@ A comprehensive, interview-ready microservices platform on Azure demonstrating e
 ## 🎯 Project Highlights
 
 ✅ **6 Independent Microservices** (API Gateway, User, Product, Order, Payment, Notification)
+✅ **Diverse Tech Stack** (Python Flask/FastAPI + Node.js Express)
 ✅ **Production-Grade Infrastructure** (AKS with 3 AZs, Application Gateway with WAF, Private Databases)
 ✅ **Zero-Downtime Deployments** (Rolling updates with health checks)
 ✅ **Auto-Scaling** (HPA based on CPU/Memory metrics)
@@ -21,6 +22,7 @@ A comprehensive, interview-ready microservices platform on Azure demonstrating e
 - **Kubernetes**: Pod management, deployments, services, ingress, HPA, policies
 - **Microservices Patterns**: API Gateway, database per service, saga transactions, circuit breakers
 - **Python Backend**: Flask & FastAPI REST APIs with proper error handling
+- **Node.js Backend**: Express.js APIs with async/await patterns
 - **CI/CD**: Multi-stage pipelines with security scanning, testing, and deployment
 - **Monitoring**: Full observability stack with metrics, logs, and traces
 - **Security**: Network segmentation, encryption, authentication, least privilege
@@ -32,12 +34,12 @@ A comprehensive, interview-ready microservices platform on Azure demonstrating e
 Internet → [Application Gateway + WAF]
              ↓
          [AKS Cluster - 3 AZs]
-         ├── api-gateway (entry point)
-         ├── user-service (stateless)
-         ├── product-service (stateless)
-         ├── order-service (connects to PostgreSQL)
-         ├── payment-service (connects to PostgreSQL)
-         ├── notification-service (event-driven via RabbitMQ)
+         ├── api-gateway (Python Flask - entry point)
+         ├── user-service (Node.js Express - stateless)
+         ├── product-service (Python FastAPI - stateless)
+         ├── order-service (Python Flask - connects to PostgreSQL)
+         ├── payment-service (Python FastAPI - connects to PostgreSQL)
+         ├── notification-service (Node.js Express - event-driven via RabbitMQ)
          ├── prometheus (monitoring)
          └── ConfigMaps/Secrets
          ↓
@@ -61,12 +63,12 @@ Azure_DevOps_Project/
 │   ├── variables.tf
 │   └── outputs.tf
 ├── services/                    # 6 Microservices
-│   ├── api-gateway/            # Flask, routing, auth
-│   ├── user-service/           # Flask, user management
-│   ├── product-service/        # FastAPI, product catalog
-│   ├── order-service/          # Flask, order management
-│   ├── payment-service/        # FastAPI, payment processing
-│   └── notification-service/   # Flask, RabbitMQ consumer
+│   ├── api-gateway/            # Python Flask, routing, auth
+│   ├── user-service/           # Node.js Express, user management
+│   ├── product-service/        # Python FastAPI, product catalog
+│   ├── order-service/          # Python Flask, order management
+│   ├── payment-service/        # Python FastAPI, payment processing
+│   └── notification-service/   # Node.js Express, RabbitMQ consumer
 ├── k8s/                        # Kubernetes Manifests
 │   ├── namespaces/
 │   ├── configmaps/
@@ -91,82 +93,13 @@ Azure_DevOps_Project/
 └── .gitignore
 ```
 
-## 🚀 Quick Start
+## � Documentation
 
-### Prerequisites
-- Azure account with active subscription
-- Azure CLI, kubectl, Terraform installed
-- Docker installed locally
-- GitHub account (for Actions)
+For detailed setup and deployment instructions, see the docs folder:
 
-### 1. Clone and Set Up Infrastructure (20-30 mins)
-
-```bash
-cd terraform
-terraform init
-terraform plan
-terraform apply
-
-# Save outputs
-terraform output -json > outputs.json
-```
-
-### 2. Configure kubectl
-
-```bash
-az aks get-credentials --resource-group devops-prod-rg --name devops-prod-aks
-kubectl cluster-info
-```
-
-### 3. Build and Push Docker Images
-
-```bash
-az acr login --name devopsproducr
-
-for service in api-gateway user-service product-service order-service payment-service notification-service; do
-  cd services/$service
-  docker build -t devopsproducr.azurecr.io/$service:v1.0.0 .
-  docker push devopsproducr.azurecr.io/$service:v1.0.0
-  cd ../..
-done
-```
-
-### 4. Deploy to Kubernetes
-
-```bash
-# Create namespace and apply all manifests
-kubectl create namespace microservices
-
-kubectl apply -f k8s/namespaces/
-kubectl apply -f k8s/configmaps/
-kubectl apply -f k8s/secrets/
-kubectl apply -f k8s/deployments/
-kubectl apply -f k8s/services/
-kubectl apply -f k8s/ingress/
-kubectl apply -f k8s/hpa/
-kubectl apply -f k8s/policies/
-kubectl apply -f k8s/monitoring/
-kubectl apply -f k8s/rbac/
-
-# Verify
-kubectl get pods -n microservices
-kubectl get svc -n microservices
-```
-
-### 5. Test APIs
-
-```bash
-# Port forward to api-gateway
-kubectl port-forward -n microservices svc/api-gateway 5000:80
-
-# Health check
-curl http://localhost:5000/health
-
-# Get products (public endpoint)
-curl http://localhost:5000/api/products
-```
-
-See [DEPLOYMENT_GUIDE.md](docs/DEPLOYMENT_GUIDE.md) for detailed instructions.
+- **[Setup Guide](docs/SETUP_GUIDE.md)** - Complete end-to-end setup and deployment instructions
+- **[Architecture](docs/ARCHITECTURE.md)** - Design patterns and best practices
+- **[Interview Guide](docs/INTERVIEW_GUIDE.md)** - Talking points for interviews
 
 ## 🔐 Security Features
 

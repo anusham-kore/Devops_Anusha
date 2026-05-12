@@ -1,0 +1,238 @@
+{
+  "version": 4,
+  "terraform_version": "1.13.0",
+  "serial": 234,
+  "lineage": "04f16c7b-e3ad-df14-74a3-fbbc05cd3c2e",
+  "outputs": {
+    "aks_cluster_name": {
+      "value": "devops-prod-aks-ci",
+      "type": "string"
+    },
+    "api_endpoint_dns": {
+      "value": "api.anusha-devops-demo.com",
+      "type": "string"
+    },
+    "resource_group_name": {
+      "value": "devops-prod-rg-centralindia",
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "mode": "data",
+      "type": "azurerm_client_config",
+      "name": "current",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "client_id": "04b07795-8ddb-461a-bbee-02f9e1bf7b46",
+            "id": "Y2xpZW50Q29uZmlncy9jbGllbnRJZD0wNGIwNzc5NS04ZGRiLTQ2MWEtYmJlZS0wMmY5ZTFiZjdiNDY7b2JqZWN0SWQ9Y2M5OWZhMzYtMGY1Mi00MjAyLWE4ODgtODI3NzY0YWZiMDYwO3N1YnNjcmlwdGlvbklkPTc0MjJiMjRkLTdlMjUtNGQ4MS05NzNlLTAyNmJmODk5MjRjMjt0ZW5hbnRJZD0zZTZjYmQxNS1iZTFkLTQwNGMtYjJjNC00YTBmOGVlMDU0YWM=",
+            "object_id": "cc99fa36-0f52-4202-a888-827764afb060",
+            "subscription_id": "7422b24d-7e25-4d81-973e-026bf89924c2",
+            "tenant_id": "3e6cbd15-be1d-404c-b2c4-4a0f8ee054ac",
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_public_ip",
+      "name": "appgw_pip",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "allocation_method": "Static",
+            "ddos_protection_mode": "VirtualNetworkInherited",
+            "ddos_protection_plan_id": null,
+            "domain_name_label": null,
+            "edge_zone": "",
+            "fqdn": null,
+            "id": "/subscriptions/7422b24d-7e25-4d81-973e-026bf89924c2/resourceGroups/devops-prod-rg-centralindia/providers/Microsoft.Network/publicIPAddresses/appgw-pip",
+            "idle_timeout_in_minutes": 4,
+            "ip_address": "20.25.116.204",
+            "ip_tags": {},
+            "ip_version": "IPv4",
+            "location": "eastus",
+            "name": "appgw-pip",
+            "public_ip_prefix_id": null,
+            "resource_group_name": "devops-prod-rg-centralindia",
+            "reverse_fqdn": null,
+            "sku": "Standard",
+            "sku_tier": "Regional",
+            "tags": {},
+            "timeouts": null,
+            "zones": []
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_resource_group.rg"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_resource_group",
+      "name": "rg",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/7422b24d-7e25-4d81-973e-026bf89924c2/resourceGroups/devops-prod-rg-centralindia",
+            "location": "eastus",
+            "managed_by": "",
+            "name": "devops-prod-rg-centralindia",
+            "tags": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo1NDAwMDAwMDAwMDAwLCJkZWxldGUiOjU0MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjo1NDAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_subnet",
+      "name": "appgw_subnet",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address_prefixes": [
+              "10.0.2.0/24"
+            ],
+            "default_outbound_access_enabled": true,
+            "delegation": [],
+            "enforce_private_link_endpoint_network_policies": false,
+            "enforce_private_link_service_network_policies": false,
+            "id": "/subscriptions/7422b24d-7e25-4d81-973e-026bf89924c2/resourceGroups/devops-prod-rg-centralindia/providers/Microsoft.Network/virtualNetworks/devops-vnet/subnets/appgw-subnet",
+            "name": "appgw-subnet",
+            "private_endpoint_network_policies": "Enabled",
+            "private_endpoint_network_policies_enabled": true,
+            "private_link_service_network_policies_enabled": true,
+            "resource_group_name": "devops-prod-rg-centralindia",
+            "service_endpoint_policy_ids": [],
+            "service_endpoints": [],
+            "timeouts": null,
+            "virtual_network_name": "devops-vnet"
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_resource_group.rg",
+            "azurerm_virtual_network.vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_virtual_network",
+      "name": "vnet",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address_space": [
+              "10.0.0.0/16"
+            ],
+            "bgp_community": "",
+            "ddos_protection_plan": [],
+            "dns_servers": [],
+            "edge_zone": "",
+            "encryption": [],
+            "flow_timeout_in_minutes": 0,
+            "guid": "af5a7db6-1b68-4f3a-bc61-1871dfdf1482",
+            "id": "/subscriptions/7422b24d-7e25-4d81-973e-026bf89924c2/resourceGroups/devops-prod-rg-centralindia/providers/Microsoft.Network/virtualNetworks/devops-vnet",
+            "location": "eastus",
+            "name": "devops-vnet",
+            "resource_group_name": "devops-prod-rg-centralindia",
+            "subnet": [
+              {
+                "address_prefix": "10.0.2.0/24",
+                "id": "/subscriptions/7422b24d-7e25-4d81-973e-026bf89924c2/resourceGroups/devops-prod-rg-centralindia/providers/Microsoft.Network/virtualNetworks/devops-vnet/subnets/appgw-subnet",
+                "name": "appgw-subnet",
+                "security_group": ""
+              }
+            ],
+            "tags": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_resource_group.rg"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_web_application_firewall_policy",
+      "name": "appgw_waf",
+      "provider": "provider[\"registry.terraform.io/hashicorp/azurerm\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "custom_rules": [],
+            "http_listener_ids": [],
+            "id": "/subscriptions/7422b24d-7e25-4d81-973e-026bf89924c2/resourceGroups/devops-prod-rg-centralindia/providers/Microsoft.Network/applicationGatewayWebApplicationFirewallPolicies/appgw-waf-policy",
+            "location": "eastus",
+            "managed_rules": [
+              {
+                "exclusion": [],
+                "managed_rule_set": [
+                  {
+                    "rule_group_override": [],
+                    "type": "OWASP",
+                    "version": "3.2"
+                  }
+                ]
+              }
+            ],
+            "name": "appgw-waf-policy",
+            "path_based_rule_ids": [],
+            "policy_settings": [
+              {
+                "enabled": true,
+                "file_upload_limit_in_mb": 100,
+                "js_challenge_cookie_expiration_in_minutes": 30,
+                "log_scrubbing": [],
+                "max_request_body_size_in_kb": 128,
+                "mode": "Detection",
+                "request_body_check": true,
+                "request_body_inspect_limit_in_kb": 128
+              }
+            ],
+            "resource_group_name": "devops-prod-rg-centralindia",
+            "tags": {},
+            "timeouts": null
+          },
+          "sensitive_attributes": [],
+          "identity_schema_version": 0,
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfSwic2NoZW1hX3ZlcnNpb24iOiIxIn0=",
+          "dependencies": [
+            "azurerm_resource_group.rg"
+          ]
+        }
+      ]
+    }
+  ],
+  "check_results": null
+}
